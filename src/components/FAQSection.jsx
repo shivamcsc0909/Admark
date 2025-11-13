@@ -119,27 +119,29 @@ export default function FAQSection() {
       id="faq" 
       className="relative py-16 px-4 overflow-hidden"
       style={{ 
-        background: 'linear-gradient(180deg, #0A0A0A 0%, #1a1a1a 50%, #0A0A0A 100%)'
+        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)',
+        fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif"
       }}
     >
-      {/* Background Glows */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
-          className="absolute w-80 h-80 rounded-full opacity-8 blur-3xl"
+          className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl"
           style={{
-            background: 'radial-gradient(circle, #FFC107 0%, transparent 70%)',
-            top: '15%',
-            right: '10%',
+            background: 'radial-gradient(circle, #6366f1 0%, transparent 70%)',
+            top: '10%',
+            right: '5%',
           }}
         />
         <div
-          className="absolute w-80 h-80 rounded-full opacity-8 blur-3xl"
+          className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl"
           style={{
-            background: 'radial-gradient(circle, #FF9800 0%, transparent 70%)',
-            bottom: '15%',
-            left: '10%',
+            background: 'radial-gradient(circle, #ec4899 0%, transparent 70%)',
+            bottom: '10%',
+            left: '5%',
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-purple-50/30" />
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -147,38 +149,53 @@ export default function FAQSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-10"
+          className="text-center mb-12"
         >
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-black mb-3"
+          <motion.h2 
+            className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 tracking-tight"
             style={{
-              background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC107 25%, #FFD700 50%, #FFC107 75%, #FFFFFF 100%)',
-              backgroundSize: '200% 200%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              animation: 'gradient-flow 5s ease infinite',
+              color: '#1e293b',
+              textShadow: '0 2px 10px rgba(99, 102, 241, 0.1)',
             }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            Frequently Asked Questions
-          </h2>
-          <p className="text-base" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            Find answers to common questions
-          </p>
+            Frequently Asked{' '}
+            <span 
+              className="bg-clip-text text-transparent"
+              style={{
+                background: 'linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f59e0b 100%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease infinite',
+              }}
+            >
+              Questions
+            </span>
+          </motion.h2>
+          <motion.p 
+            className="text-lg font-medium max-w-2xl mx-auto"
+            style={{ color: '#475569' }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Get answers to all your questions about our services, pricing, and more
+          </motion.p>
         </motion.div>
 
         {/* Grid Layout: Category Tabs + FAQ */}
-        <div className="grid lg:grid-cols-12 gap-6">
+        <div className="grid lg:grid-cols-12 gap-8">
           {/* Left: Category Tabs */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true }}
             className="lg:col-span-3"
           >
-            <div className="space-y-2 lg:sticky lg:top-24">
+            <div className="space-y-3 lg:sticky lg:top-24">
               {categories.map((cat) => (
                 <motion.button
                   key={cat.id}
@@ -186,26 +203,48 @@ export default function FAQSection() {
                     setSelectedCategory(cat.id);
                     setOpenFAQ(null);
                   }}
-                  whileHover={{ x: 5 }}
+                  whileHover={{ 
+                    x: 8,
+                    scale: 1.02,
+                    transition: { type: "spring", stiffness: 400 }
+                  }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center gap-3"
+                  className="w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 flex items-center gap-4 group relative overflow-hidden"
                   style={{
                     background: selectedCategory === cat.id
-                      ? 'linear-gradient(135deg, rgba(255,193,7,0.15) 0%, rgba(255,152,0,0.1) 100%)'
-                      : 'rgba(255,255,255,0.03)',
+                      ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+                      : 'rgba(255, 255, 255, 0.8)',
                     border: selectedCategory === cat.id
-                      ? '2px solid rgba(255, 193, 7, 0.5)'
-                      : '2px solid rgba(255,255,255,0.08)',
+                      ? '2px solid transparent'
+                      : '2px solid rgba(99, 102, 241, 0.2)',
                     boxShadow: selectedCategory === cat.id
-                      ? '0 4px 20px rgba(255, 193, 7, 0.2)'
-                      : 'none',
+                      ? '0 10px 30px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1)'
+                      : '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    backdropFilter: 'blur(10px)',
                   }}
                 >
-                  <span className="text-2xl">{cat.icon}</span>
+                  {/* Background overlay for selected */}
+                  {selectedCategory === cat.id && (
+                    <motion.div
+                      className="absolute inset-0 bg-white/10"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                    />
+                  )}
+                  
                   <span 
-                    className="text-sm font-bold"
+                    className="text-2xl transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      color: selectedCategory === cat.id ? 'white' : '#6366f1',
+                      filter: selectedCategory === cat.id ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' : 'none'
+                    }}
+                  >
+                    {cat.icon}
+                  </span>
+                  <span 
+                    className="text-sm font-bold transition-all duration-300"
                     style={{ 
-                      color: selectedCategory === cat.id ? '#FFC107' : 'rgba(255,255,255,0.7)'
+                      color: selectedCategory === cat.id ? 'white' : '#334155',
                     }}
                   >
                     {cat.label.replace(' Related Questions', '')}
@@ -223,37 +262,45 @@ export default function FAQSection() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-3"
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="space-y-4"
               >
                 {faqData[selectedCategory].map((faq, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    whileHover={{ scale: 1.01 }}
-                    className="rounded-xl overflow-hidden transition-all duration-300 group"
+                    transition={{ 
+                      duration: 0.4, 
+                      delay: index * 0.1,
+                      ease: "easeOut"
+                    }}
+                    whileHover={{ 
+                      scale: 1.01,
+                      transition: { type: "spring", stiffness: 400 }
+                    }}
+                    className="rounded-2xl overflow-hidden transition-all duration-300 group cursor-pointer"
                     style={{
                       background: openFAQ === index 
-                        ? 'linear-gradient(135deg, rgba(255,193,7,0.12) 0%, rgba(255,152,0,0.08) 100%)'
-                        : 'rgba(255,255,255,0.03)',
+                        ? 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248, 250, 252, 0.9) 100%)'
+                        : 'rgba(255, 255, 255, 0.7)',
                       border: openFAQ === index 
-                        ? '2px solid rgba(255, 193, 7, 0.4)' 
-                        : '2px solid rgba(255,255,255,0.08)',
+                        ? '2px solid #6366f1' 
+                        : '2px solid rgba(99, 102, 241, 0.15)',
                       boxShadow: openFAQ === index 
-                        ? '0 6px 25px rgba(255, 193, 7, 0.2)' 
-                        : 'none',
+                        ? '0 20px 40px rgba(99, 102, 241, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8)'
+                        : '0 8px 25px rgba(0, 0, 0, 0.06)',
+                      backdropFilter: 'blur(10px)',
                     }}
+                    onClick={() => toggleFAQ(index)}
                   >
-                    <button
-                      onClick={() => toggleFAQ(index)}
-                      className="w-full px-5 py-4 flex items-center justify-between text-left transition-all duration-300"
-                    >
+                    <div className="px-6 py-5 flex items-center justify-between text-left transition-all duration-300">
                       <span 
-                        className="text-sm md:text-base font-bold pr-4 flex-1" 
+                        className="text-base md:text-lg font-bold pr-6 flex-1 leading-relaxed"
                         style={{ 
-                          color: openFAQ === index ? '#FFC107' : 'rgba(255,255,255,0.85)'
+                          color: openFAQ === index ? '#6366f1' : '#1e293b',
+                          fontFamily: "'Inter', system-ui, sans-serif",
+                          fontWeight: 700
                         }}
                       >
                         {faq.question}
@@ -261,19 +308,27 @@ export default function FAQSection() {
                       
                       <motion.div
                         animate={{ rotate: openFAQ === index ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg"
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300"
                         style={{
                           background: openFAQ === index 
-                            ? 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)'
-                            : 'rgba(255, 193, 7, 0.1)',
-                          color: openFAQ === index ? '#000' : '#FFC107',
-                          border: openFAQ === index ? 'none' : '2px solid rgba(255, 193, 7, 0.3)',
+                            ? 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)'
+                            : 'rgba(99, 102, 241, 0.1)',
+                          color: openFAQ === index ? 'white' : '#6366f1',
+                          border: openFAQ === index ? 'none' : '2px solid rgba(99, 102, 241, 0.2)',
+                          boxShadow: openFAQ === index 
+                            ? '0 4px 15px rgba(99, 102, 241, 0.4)'
+                            : '0 2px 10px rgba(0, 0, 0, 0.05)',
                         }}
                       >
-                        {openFAQ === index ? '−' : '+'}
+                        <motion.span
+                          animate={{ scale: openFAQ === index ? 0.8 : 1 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {openFAQ === index ? '−' : '+'}
+                        </motion.span>
                       </motion.div>
-                    </button>
+                    </div>
 
                     <AnimatePresence>
                       {openFAQ === index && (
@@ -281,23 +336,24 @@ export default function FAQSection() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25 }}
+                          transition={{ duration: 0.3, ease: "easeOut" }}
                           className="overflow-hidden"
                         >
                           <div 
-                            className="px-5 pb-4 pt-1"
+                            className="px-6 pb-6 pt-2"
                             style={{
-                              borderTop: '1px solid rgba(255, 193, 7, 0.15)',
+                              borderTop: '1px solid rgba(99, 102, 241, 0.1)',
                             }}
                           >
                             <motion.p 
                               initial={{ y: -10, opacity: 0 }}
                               animate={{ y: 0, opacity: 1 }}
                               transition={{ delay: 0.1, duration: 0.25 }}
-                              className="text-sm leading-relaxed"
+                              className="text-base leading-relaxed font-medium"
                               style={{ 
-                                color: 'rgba(255, 255, 255, 0.85)',
-                                lineHeight: '1.7',
+                                color: '#475569',
+                                lineHeight: '1.8',
+                                fontFamily: "'Inter', system-ui, sans-serif"
                               }}
                             >
                               {faq.answer}
@@ -313,42 +369,72 @@ export default function FAQSection() {
           </div>
         </div>
 
-        {/* Compact CTA */}
+        {/* Enhanced CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mt-10 p-6 rounded-xl relative overflow-hidden group"
+          className="text-center mt-14 p-8 rounded-2xl relative overflow-hidden group"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,193,7,0.1) 0%, rgba(255,152,0,0.06) 100%)',
-            border: '2px solid rgba(255, 193, 7, 0.25)',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248, 250, 252, 0.9) 100%)',
+            border: '2px solid rgba(99, 102, 241, 0.2)',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.6)',
+            backdropFilter: 'blur(10px)',
           }}
         >
-          <h3 className="text-xl font-black mb-2" style={{ color: '#FFC107' }}>
+          {/* Background pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 25px 25px, #6366f1 2px, transparent 0%)`,
+              backgroundSize: '50px 50px',
+            }} />
+          </div>
+
+          <motion.h3 
+            className="text-2xl font-black mb-3"
+            style={{ color: '#1e293b' }}
+            whileHover={{ scale: 1.05 }}
+          >
             Still Have Questions?
-          </h3>
-          <p className="text-sm mb-4" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            Our team is here to help!
-          </p>
+          </motion.h3>
+          <motion.p 
+            className="text-lg mb-6 font-medium"
+            style={{ color: '#475569' }}
+          >
+            Our team is here to help you succeed!
+          </motion.p>
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: '0 15px 35px rgba(99, 102, 241, 0.4)'
+            }}
             whileTap={{ scale: 0.95 }}
-            className="inline-block px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 overflow-hidden group/btn"
+            className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-base transition-all duration-300 relative overflow-hidden group/btn"
             style={{
-              background: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
-              color: '#000',
-              boxShadow: '0 6px 20px rgba(255, 193, 7, 0.3)',
+              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+              color: 'white',
+              boxShadow: '0 8px 25px rgba(99, 102, 241, 0.3)',
             }}
           >
-            Contact Us →
+            <span className="relative z-10">Get Instant Help</span>
+            <motion.span
+              className="relative z-10"
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.span>
+            
+            {/* Button hover effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700" />
           </motion.a>
         </motion.div>
       </div>
 
-      <style>{`
-        @keyframes gradient-flow {
+      <style jsx>{`
+        @keyframes gradient-shift {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
         }

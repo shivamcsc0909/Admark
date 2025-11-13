@@ -23,7 +23,7 @@ export default function CaseStudy() {
         position: 'CEO, TechStore Inc.',
         avatar: '👩‍💼'
       },
-      color: '#FFC107'
+      color: '#2563eb'
     },
     {
       id: 2,
@@ -45,7 +45,7 @@ export default function CaseStudy() {
         position: 'Founder, CloudFlow',
         avatar: '👨‍💼'
       },
-      color: '#FF9800'
+      color: '#dc2626'
     },
     {
       id: 3,
@@ -67,23 +67,23 @@ export default function CaseStudy() {
         position: 'Owner, Urban Fitness',
         avatar: '👨‍⚕️'
       },
-      color: '#FFC107'
+      color: '#16a34a'
     }
   ];
 
-  // 3D hover animation variants
+  // Animation variants
   const card3DHover = {
     initial: { 
       scale: 1,
       rotateY: 0,
       rotateX: 0,
-      boxShadow: "0px 0px 0px rgba(255, 193, 7, 0)"
+      boxShadow: "0px 5px 15px rgba(0,0,0,0.08)"
     },
     hover: { 
-      scale: 1.02,
-      rotateY: 5,
-      rotateX: 2,
-      boxShadow: "0px 20px 40px rgba(255, 193, 7, 0.3)",
+      scale: 1.03,
+      rotateY: 3,
+      rotateX: 1,
+      boxShadow: "0px 20px 40px rgba(0,0,0,0.15)",
       transition: {
         type: "spring",
         stiffness: 300,
@@ -95,14 +95,12 @@ export default function CaseStudy() {
   const resultCardHover = {
     initial: { 
       scale: 1,
-      rotateZ: 0,
       y: 0
     },
     hover: { 
-      scale: 1.05,
-      rotateZ: 1,
-      y: -5,
-      boxShadow: "0px 15px 30px rgba(255, 193, 7, 0.2)",
+      scale: 1.08,
+      y: -8,
+      boxShadow: "0px 15px 30px rgba(0,0,0,0.12)",
       transition: {
         type: "spring",
         stiffness: 400,
@@ -117,9 +115,9 @@ export default function CaseStudy() {
       rotateY: 0
     },
     hover: { 
-      scale: 1.03,
-      rotateY: 8,
-      boxShadow: "0px 25px 50px rgba(255, 193, 7, 0.25)",
+      scale: 1.02,
+      rotateY: 5,
+      boxShadow: "0px 20px 40px rgba(0,0,0,0.1)",
       transition: {
         type: "spring",
         stiffness: 300,
@@ -128,10 +126,24 @@ export default function CaseStudy() {
     }
   };
 
+  const floatingAnimation = {
+    initial: { y: 0 },
+    hover: { 
+      y: [-5, 5, -5],
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
     <section id="case-studies" className="relative">
       {/* Header Section */}
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#0A0A0A' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ 
+        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%)'
+      }}>
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -139,22 +151,46 @@ export default function CaseStudy() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-6xl md:text-8xl font-black mb-6" style={{
-              background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC107 100%)',
+            <motion.div
+              variants={floatingAnimation}
+              initial="initial"
+              whileHover="hover"
+              className="inline-block mb-6"
+            >
+              <span className="text-4xl">🚀</span>
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black mb-6 tracking-tight" style={{
+              background: 'linear-gradient(135deg, #1e40af 0%, #dc2626 50%, #16a34a 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontFamily: "'High Tower Text', 'Times New Roman', serif",
+              letterSpacing: '0.1em',
+              fontWeight: 'normal'
             }}>
               Success Stories
             </h2>
-            <p className="text-2xl md:text-3xl mb-8" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+            <p className="text-xl md:text-2xl mb-8 font-medium tracking-wide" style={{ 
+              color: '#374151',
+              fontFamily: "'Merlin', 'Georgia', serif",
+              fontStyle: 'italic'
+            }}>
               Real Results • Real Growth • Real Impact
             </p>
-            <div className="flex flex-col items-center gap-2 animate-bounce mt-12">
-              <span className="text-sm font-medium" style={{ color: '#FFC107' }}>Scroll to explore</span>
-              <svg className="w-6 h-6" style={{ color: '#FFC107' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <motion.div 
+              className="flex flex-col items-center gap-2 mt-12"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <span className="text-sm font-semibold tracking-wide" style={{ 
+                color: '#2563eb',
+                fontFamily: "'Harrington', 'Verdana', sans-serif"
+              }}>
+                Scroll to explore
+              </span>
+              <svg className="w-6 h-6" style={{ color: '#2563eb' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
@@ -166,21 +202,17 @@ export default function CaseStudy() {
           className="min-h-screen relative flex items-center"
           style={{
             background: index % 2 === 0 
-              ? 'linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%)'
-              : 'linear-gradient(135deg, #1a1a1a 0%, #0A0A0A 100%)'
+              ? 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)'
+              : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)'
           }}
           initial="initial"
           whileHover="hover"
         >
-          {/* Background Image with Overlay */}
-          <div className="absolute inset-0">
-            <img
-              src={study.image}
-              alt={study.title}
-              className="w-full h-full object-cover opacity-20"
-            />
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
-              background: `linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.7) 100%)`
+              backgroundImage: `radial-gradient(${study.color}20 1px, transparent 1px)`,
+              backgroundSize: '50px 50px'
             }} />
           </div>
 
@@ -198,54 +230,86 @@ export default function CaseStudy() {
                   variants={card3DHover}
                   className="w-full"
                 >
-                  <div className="inline-block px-4 py-2 rounded-full mb-6" style={{
-                    background: `rgba(255, 193, 7, 0.1)`,
-                    border: `1px solid rgba(255, 193, 7, 0.3)`
-                  }}>
-                    <span style={{ color: study.color }} className="text-sm font-semibold">
+                  <motion.div 
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 shadow-lg"
+                    style={{
+                      background: `${study.color}15`,
+                      border: `2px solid ${study.color}30`
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <span className="text-lg">🏷️</span>
+                    <span style={{ 
+                      color: study.color,
+                      fontFamily: "'Pressure', 'Arial Black', sans-serif",
+                      letterSpacing: '0.05em'
+                    }} className="text-sm font-bold tracking-wide">
                       {study.industry}
                     </span>
-                  </div>
+                  </motion.div>
 
-                  <h3 className="text-5xl md:text-6xl font-black mb-4 leading-tight" style={{ color: study.color }}>
+                  <h3 className="text-4xl md:text-5xl font-black mb-4 leading-tight tracking-tight" style={{ 
+                    color: study.color,
+                    fontFamily: "'Black Chancery', 'Palatino Linotype', serif",
+                    fontWeight: 'normal',
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+                  }}>
                     {study.title}
                   </h3>
 
-                  <p className="text-2xl font-bold mb-8" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                  <p className="text-xl font-bold mb-8 tracking-wide" style={{ 
+                    color: '#1f2937',
+                    fontFamily: "'Merlin', 'Georgia', serif",
+                    fontStyle: 'italic'
+                  }}>
                     {study.client}
                   </p>
 
                   <div className="space-y-6 mb-8 w-full">
                     <motion.div 
-                      className="p-6 rounded-2xl w-full"
+                      className="p-6 rounded-2xl w-full shadow-lg backdrop-blur-sm"
                       style={{
-                        background: 'rgba(255, 193, 7, 0.05)',
-                        border: '2px solid rgba(255, 193, 7, 0.2)'
+                        background: 'rgba(255, 255, 255, 0.7)',
+                        border: `2px solid ${study.color}20`
                       }}
                       variants={card3DHover}
                       whileHover="hover"
                     >
-                      <h4 className="text-xl font-bold mb-3 flex items-center gap-2" style={{ color: study.color }}>
-                        🎯 Challenge
+                      <h4 className="text-lg font-bold mb-3 flex items-center gap-2 tracking-wide" style={{ 
+                        color: study.color,
+                        fontFamily: "'Harrington', 'Verdana', sans-serif"
+                      }}>
+                        <span className="text-xl">🎯</span> Challenge
                       </h4>
-                      <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                      <p className="text-base leading-relaxed tracking-wide" style={{ 
+                        color: '#4b5563', 
+                        fontWeight: '500',
+                        fontFamily: "'Merlin', 'Georgia', serif"
+                      }}>
                         {study.challenge}
                       </p>
                     </motion.div>
 
                     <motion.div 
-                      className="p-6 rounded-2xl w-full"
+                      className="p-6 rounded-2xl w-full shadow-lg backdrop-blur-sm"
                       style={{
-                        background: 'rgba(255, 193, 7, 0.05)',
-                        border: '2px solid rgba(255, 193, 7, 0.2)'
+                        background: 'rgba(255, 255, 255, 0.7)',
+                        border: `2px solid ${study.color}20`
                       }}
                       variants={card3DHover}
                       whileHover="hover"
                     >
-                      <h4 className="text-xl font-bold mb-3 flex items-center gap-2" style={{ color: study.color }}>
-                        💡 Solution
+                      <h4 className="text-lg font-bold mb-3 flex items-center gap-2 tracking-wide" style={{ 
+                        color: study.color,
+                        fontFamily: "'Harrington', 'Verdana', sans-serif"
+                      }}>
+                        <span className="text-xl">💡</span> Solution
                       </h4>
-                      <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                      <p className="text-base leading-relaxed tracking-wide" style={{ 
+                        color: '#4b5563', 
+                        fontWeight: '500',
+                        fontFamily: "'Merlin', 'Georgia', serif"
+                      }}>
                         {study.solution}
                       </p>
                     </motion.div>
@@ -270,27 +334,49 @@ export default function CaseStudy() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5, delay: idx * 0.1 }}
                       viewport={{ once: true }}
-                      className="p-4 sm:p-6 rounded-2xl text-center w-full"
+                      className="p-4 sm:p-6 rounded-2xl text-center w-full backdrop-blur-sm shadow-lg"
                       style={{
-                        background: 'rgba(255, 193, 7, 0.05)',
-                        border: '2px solid rgba(255, 193, 7, 0.2)',
+                        background: 'rgba(255, 255, 255, 0.8)',
+                        border: `2px solid ${study.color}15`
                       }}
                       variants={resultCardHover}
                       whileHover="hover"
                     >
-                      <div className="text-sm font-semibold mb-2 uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                      <div className="text-xs font-bold mb-2 uppercase tracking-widest" style={{ 
+                        color: '#6b7280',
+                        fontFamily: "'Pressure', 'Arial Black', sans-serif",
+                        letterSpacing: '0.1em'
+                      }}>
                         {result.metric}
                       </div>
-                      <div className="flex items-center justify-center gap-2 mb-2 flex-wrap">
-                        <span className="text-base sm:text-lg" style={{ color: 'rgba(255, 255, 255, 0.5)' }}>
+                      <div className="flex items-center justify-center gap-1 mb-2 flex-wrap">
+                        <span className="text-sm" style={{ 
+                          color: '#9ca3af',
+                          fontFamily: "'Merlin', 'Georgia', serif"
+                        }}>
                           {result.before}
                         </span>
-                        <span style={{ color: study.color }} className="text-lg">→</span>
-                        <span className="text-base sm:text-lg font-bold" style={{ color: study.color }}>
+                        <motion.span 
+                          style={{ color: study.color }} 
+                          className="text-lg font-bold"
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          →
+                        </motion.span>
+                        <span className="text-sm font-bold" style={{ 
+                          color: study.color,
+                          fontFamily: "'Merlin', 'Georgia', serif"
+                        }}>
                           {result.after}
                         </span>
                       </div>
-                      <div className="text-2xl sm:text-3xl font-black" style={{ color: study.color }}>
+                      <div className="text-xl sm:text-2xl font-black tracking-tight" style={{ 
+                        color: study.color,
+                        fontFamily: "'Monotype Corsiva', 'Brush Script MT', cursive",
+                        fontStyle: 'italic',
+                        fontWeight: 'normal'
+                      }}>
                         {result.increase}
                       </div>
                     </motion.div>
@@ -299,24 +385,36 @@ export default function CaseStudy() {
 
                 {/* Testimonial */}
                 <motion.div 
-                  className="p-6 sm:p-8 rounded-2xl w-full"
+                  className="p-6 sm:p-8 rounded-2xl w-full backdrop-blur-sm shadow-lg"
                   style={{
-                    background: 'rgba(255, 193, 7, 0.05)',
-                    border: '2px solid rgba(255, 193, 7, 0.3)'
+                    background: 'rgba(255, 255, 255, 0.8)',
+                    border: `2px solid ${study.color}20`
                   }}
                   variants={testimonialHover}
                   whileHover="hover"
                 >
-                  <div className="text-5xl mb-4" style={{ color: study.color }}>❝</div>
-                  <p className="text-lg sm:text-xl mb-6 italic leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                  <motion.div 
+                    className="text-4xl mb-4"
+                    style={{ color: study.color }}
+                    animate={{ rotate: [0, 5, 0, -5, 0] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  >
+                    ❝
+                  </motion.div>
+                  <p className="text-base sm:text-lg mb-6 italic leading-relaxed tracking-wide" style={{ 
+                    color: '#374151',
+                    fontWeight: '500',
+                    fontFamily: "'Black Chancery', 'Palatino Linotype', serif",
+                    fontSize: '1.1em'
+                  }}>
                     {study.testimonial.quote}
                   </p>
                   <div className="flex items-center gap-4">
                     <motion.div 
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl sm:text-3xl"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-2xl shadow-lg"
                       style={{
-                        background: `rgba(255, 193, 7, 0.2)`,
-                        border: `2px solid ${study.color}`
+                        background: `${study.color}20`,
+                        border: `2px solid ${study.color}40`
                       }}
                       whileHover={{ 
                         scale: 1.1,
@@ -327,10 +425,18 @@ export default function CaseStudy() {
                       {study.testimonial.avatar}
                     </motion.div>
                     <div>
-                      <div className="font-bold text-lg" style={{ color: study.color }}>
+                      <div className="font-bold text-lg tracking-wide" style={{ 
+                        color: study.color,
+                        fontFamily: "'Harrington', 'Verdana', sans-serif"
+                      }}>
                         {study.testimonial.author}
                       </div>
-                      <div className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                      <div className="text-sm tracking-wide" style={{ 
+                        color: '#6b7280', 
+                        fontWeight: '500',
+                        fontFamily: "'Merlin', 'Georgia', serif",
+                        fontStyle: 'italic'
+                      }}>
                         {study.testimonial.position}
                       </div>
                     </div>
@@ -343,7 +449,9 @@ export default function CaseStudy() {
       ))}
 
       {/* Final CTA Section */}
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#0A0A0A' }}>
+      <div className="min-h-screen flex items-center justify-center" style={{ 
+        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%)'
+      }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -351,28 +459,51 @@ export default function CaseStudy() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto px-4 text-center w-full"
         >
-          <h3 className="text-5xl md:text-6xl font-black mb-6" style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, #FFC107 100%)',
+          <motion.div
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, 0]
+            }}
+            transition={{ 
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-5xl mb-6"
+          >
+            🌟
+          </motion.div>
+          <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight" style={{
+            background: 'linear-gradient(135deg, #1e40af 0%, #dc2626 50%, #16a34a 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            fontFamily: "'Pressure', 'Impact', sans-serif",
+            letterSpacing: '0.05em',
+            fontWeight: 'bold'
           }}>
             Ready to Be Our Next Success Story?
           </h3>
-          <p className="text-2xl mb-12" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+          <p className="text-xl mb-12 tracking-wide" style={{ 
+            color: '#374151',
+            fontWeight: '500',
+            fontFamily: "'Merlin', 'Georgia', serif",
+            fontStyle: 'italic'
+          }}>
             Let's create a case study about your incredible growth
           </p>
           <motion.a
             href="#get-quote"
-            className="inline-block px-12 py-5 rounded-full font-bold text-xl transition-all duration-300"
+            className="inline-flex items-center gap-3 px-12 py-5 rounded-full font-bold text-lg tracking-wide shadow-lg transition-all duration-300"
             style={{
-              background: 'linear-gradient(135deg, #FFC107 0%, #FF9800 100%)',
-              boxShadow: '0 8px 30px rgba(255, 193, 7, 0.4)',
-              color: '#000'
+              background: 'linear-gradient(135deg, #2563eb 0%, #16a34a 100%)',
+              boxShadow: '0 8px 30px rgba(37, 99, 235, 0.3)',
+              color: 'white',
+              fontFamily: "'Pressure', 'Arial Black', sans-serif",
+              letterSpacing: '0.05em'
             }}
             whileHover={{ 
               scale: 1.05,
-              rotateY: 10,
-              boxShadow: '0 15px 40px rgba(255, 193, 7, 0.6)',
+              boxShadow: '0 15px 40px rgba(37, 99, 235, 0.4)',
               transition: {
                 type: "spring",
                 stiffness: 400,
@@ -381,7 +512,13 @@ export default function CaseStudy() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            Get Your Free Strategy Session 🚀
+            <span>Get Your Free Strategy Session</span>
+            <motion.span
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              🚀
+            </motion.span>
           </motion.a>
         </motion.div>
       </div>

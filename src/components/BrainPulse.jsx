@@ -18,8 +18,8 @@ export default function BrainPulse() {
     for (let i = 0; i < 40; i++) {
       const geometry = new THREE.SphereGeometry(0.15, 16, 16);
       const material = new THREE.MeshPhongMaterial({
-        color: 0x06b6d4,
-        emissive: 0x06b6d4,
+        color: 0x7e22ce,
+        emissive: 0x7e22ce,
         emissiveIntensity: 0.6,
         transparent: true,
         opacity: 0.9
@@ -35,7 +35,7 @@ export default function BrainPulse() {
     }
 
     // Connections
-    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.5 });
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.5 });
     brainNodes.forEach((node, i) => {
       if (i < brainNodes.length - 2) {
         const points = [node.position, brainNodes[i + 1].position];
@@ -88,32 +88,44 @@ export default function BrainPulse() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center py-24 bg-gradient-to-b from-purple-900/30 to-blue-900/30">
+    <section className="relative min-h-screen flex items-center justify-center py-24 bg-gradient-to-br from-rose-50 to-amber-50">
       <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
-        <h2 className="text-5xl md:text-7xl font-bold text-center mb-6 fade-in-up bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
+        <h2 className="text-5xl md:text-7xl font-bold text-center mb-6 fade-in-up bg-clip-text text-transparent bg-gradient-to-r from-purple-700 to-blue-600 font-serif tracking-tight">
           Digital Brain Pulse
         </h2>
-        <p className="text-xl text-center text-gray-300 mb-16 max-w-3xl mx-auto fade-in-up">
+        <p className="text-xl text-center text-gray-800 mb-16 max-w-3xl mx-auto fade-in-up font-medium leading-relaxed">
           Our intelligent approach combines creativity with data science to power your brand's exponential growth
         </p>
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="h-[500px] fade-in-up">
+          <div className="h-[500px] fade-in-up rounded-3xl overflow-hidden shadow-2xl border border-white/50">
             <canvas ref={canvasRef} className="w-full h-full" />
           </div>
           <div className="space-y-6">
             {items.map((item, i) => (
               <div 
                 key={i}
-                className="fade-in-up group p-6 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-lg rounded-2xl border border-purple-500/30 hover:border-cyan-400/60 hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] transition-all duration-300 cursor-pointer"
+                className="fade-in-up group p-6 bg-white/80 backdrop-blur-lg rounded-2xl border border-gray-200/60 hover:border-purple-400 hover:shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer hover:bg-white/90"
+                style={{
+                  transform: 'translateY(0)',
+                  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                }}
               >
-                <h3 className="text-2xl font-bold mb-3 text-cyan-400 group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-2xl font-bold mb-3 text-gray-800 group-hover:text-purple-700 transition-colors duration-300 font-sans">
                   {item.title}
                 </h3>
-                <p className="text-gray-300 leading-relaxed">{item.desc}</p>
+                <p className="text-gray-700 leading-relaxed font-medium group-hover:text-gray-900 transition-colors duration-300">
+                  {item.desc}
+                </p>
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-purple-600 to-blue-500 group-hover:w-full transition-all duration-500 rounded-full"></div>
               </div>
             ))}
           </div>
         </div>
+        
+        {/* Additional decorative elements */}
+        <div className="absolute top-10 left-10 w-20 h-20 bg-purple-300/30 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-amber-300/40 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-300/30 rounded-full blur-lg"></div>
       </div>
     </section>
   );

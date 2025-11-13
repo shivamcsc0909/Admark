@@ -5,70 +5,91 @@ export default function BlogSection() {
     {
       title: '10 SEO Trends to Watch in 2025',
       category: 'SEO',
-      icon: '📊'
+      icon: '📊',
+      image: '/api/placeholder/400/250' // Add image URLs here
     },
     {
       title: 'How to Maximize Your PPC ROI',
       category: 'PPC',
-      icon: '💰'
+      icon: '💰',
+      image: '/api/placeholder/400/250'
     },
     {
       title: 'The Power of Local SEO for Small Businesses',
       category: 'Local SEO',
-      icon: '📍'
+      icon: '📍',
+      image: '/api/placeholder/400/250'
     }
   ];
 
   return (
-    {/* <section className="relative py-24 px-4 bg-gradient-to-b from-blue-900/30 to-gray-900/50">
+    <section className="relative py-20 px-4 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-16">
-          <div>
-            <h2 className="text-5xl md:text-6xl font-bold fade-in-up bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">
-              Latest Insights
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-center mb-16 text-center lg:text-left">
+          <div className="mb-8 lg:mb-0">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+                Latest Insights
+              </span>
             </h2>
-            <p className="text-xl text-gray-400 mt-4 fade-in-up">
-              Expert tips and industry trends to help you succeed
+            <p className="text-xl text-gray-700 mt-4 max-w-2xl">
+              Expert tips and industry trends to help you succeed in digital marketing
             </p>
           </div>
-          <button className="hidden md:block px-8 py-4 bg-white/10 backdrop-blur-lg rounded-full font-bold border border-purple-500/30 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all duration-300">
+          <button className="px-8 py-4 bg-white rounded-2xl font-bold border-2 border-blue-200 text-blue-700 hover:border-purple-300 hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg">
             View All Posts →
           </button>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Blog Posts Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post, i) => (
             <div 
               key={i}
-              className="fade-in-up group cursor-pointer"
+              className="group cursor-pointer"
             >
-              <div className="relative h-64 bg-gradient-to-br from-purple-600/20 to-cyan-600/20 rounded-2xl overflow-hidden border border-purple-500/30 group-hover:border-cyan-400/50 transition-all duration-300 mb-6">
-                <div className="absolute inset-0 flex items-center justify-center text-7xl">
-                  {post.icon}
+              {/* Card Container */}
+              <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg hover:shadow-2xl hover:border-blue-300 transition-all duration-500 hover:scale-105">
+                
+                {/* Image Container with Icon Overlay */}
+                <div className="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl overflow-hidden border border-gray-200 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300 mb-6 flex items-center justify-center">
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50"></div>
+                  
+                  {/* Icon */}
+                  <div className="relative text-5xl transform group-hover:scale-110 transition-transform duration-300">
+                    {post.icon}
+                  </div>
                 </div>
-              </div>
 
-              <div className="inline-block px-4 py-2 bg-cyan-500/20 rounded-full text-cyan-400 text-sm font-semibold mb-4">
-                {post.category}
+                {/* Category Badge */}
+                <div className="inline-block px-4 py-2 bg-blue-100 rounded-full text-blue-700 text-sm font-semibold mb-4 border border-blue-200">
+                  {post.category}
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+                  {post.title}
+                </h3>
+                
+                {/* Read More Button */}
+                <button className="flex items-center text-blue-600 font-semibold hover:text-purple-600 transition-colors duration-300 group/btn">
+                  Read More 
+                  <span className="ml-2 transform group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
+                </button>
               </div>
-              
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors">
-                {post.title}
-              </h3>
-              
-              <button className="text-cyan-400 font-semibold hover:text-cyan-300 transition-colors">
-                Read More →
-              </button>
             </div>
           ))}
         </div>
 
-        <div className="md:hidden text-center mt-12">
-          <button className="px-8 py-4 bg-white/10 backdrop-blur-lg rounded-full font-bold border border-purple-500/30 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all duration-300">
+        {/* Mobile View All Button */}
+        <div className="lg:hidden text-center mt-12">
+          <button className="px-8 py-4 bg-white rounded-2xl font-bold border-2 border-blue-200 text-blue-700 hover:border-purple-300 hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg">
             View All Posts →
           </button>
         </div>
       </div>
-    </section> */}
+    </section>
   );
 }

@@ -17,25 +17,25 @@ export default function AboutUs() {
       icon: '💡',
       title: 'Innovation First',
       description: 'We stay ahead of trends and pioneer new marketing strategies',
-      color: '#00F0FF'
+      color: '#2563eb'
     },
     {
       icon: '🎯',
       title: 'Results Driven',
       description: 'Every campaign is measured by tangible business outcomes',
-      color: '#7B2CBF'
+      color: '#7c3aed'
     },
     {
       icon: '🤝',
       title: 'Client Partnership',
       description: 'Your success is our success - we grow together',
-      color: '#FF006E'
+      color: '#dc2626'
     },
     {
       icon: '⚡',
       title: 'Agile Execution',
       description: 'Fast, flexible, and focused on what matters most',
-      color: '#00F0FF'
+      color: '#059669'
     }
   ];
 
@@ -51,55 +51,52 @@ export default function AboutUs() {
       title: 'Data-Driven Approach',
       description: 'Every decision backed by analytics and market research',
       icon: '📊',
-      color: '#00F0FF'
+      color: '#2563eb'
     },
     {
       title: 'Transparent Reporting',
       description: 'Real-time dashboards showing exactly where your money goes',
       icon: '📈',
-      color: '#7B2CBF'
+      color: '#7c3aed'
     },
     {
       title: 'Dedicated Account Manager',
       description: 'Your personal point of contact for all communications',
       icon: '🎯',
-      color: '#FF006E'
+      color: '#dc2626'
     },
     {
       title: 'Proven Track Record',
       description: 'Average ROI of 300%+ across all client campaigns',
       icon: '💰',
-      color: '#00F0FF'
+      color: '#059669'
     },
     {
       title: 'Cutting-Edge Tech',
       description: 'AI, automation, and the latest marketing tools',
       icon: '🤖',
-      color: '#7B2CBF'
+      color: '#7c3aed'
     },
     {
       title: 'No Long-Term Contracts',
       description: 'Month-to-month flexibility - we earn your business daily',
       icon: '📝',
-      color: '#FF006E'
+      color: '#2563eb'
     }
   ];
 
   return (
     <div className="w-full">
-      {/* Wave Section - New Design */}
+      {/* Updated Wave Section with Consistent Background */}
       <section id="about" className="about-us-section">
-        {/* Wave SVG creates the wavy shaped area + gold outline */}
+        {/* Wave SVG */}
         <svg className="wave-shape" viewBox="0 0 1400 300" preserveAspectRatio="none" aria-hidden="true">
-          {/* filled dark wave area */}
           <path d="M0,120 C160,40 320,190 560,120 C800,50 980,170 1400,110 L1400,300 L0,300 Z"
-                fill="#0d1116"/>
-          {/* thin gold stroke following crest to give gold-border feeling */}
+                fill="#f0f9ff"/>
           <path d="M0,120 C160,40 320,190 560,120 C800,50 980,170 1400,110"
-                fill="none" stroke="rgba(212,175,55,0.18)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-          {/* subtle outer glow line */}
+                fill="none" stroke="rgba(37, 99, 235, 0.25)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
           <path d="M0,120 C160,40 320,190 560,120 C800,50 980,170 1400,110"
-                fill="none" stroke="rgba(212,175,55,0.06)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+                fill="none" stroke="rgba(37, 99, 235, 0.1)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
 
         <div className="about-inner container">
@@ -111,7 +108,7 @@ export default function AboutUs() {
 
           {/* right: text */}
           <div className="about-text">
-            <div className="subtle">ABOUT US</div>
+            <div className="section-badge">ABOUT US</div>
             <h2><span className="accent">Digital Market Agency</span></h2>
             <p>
               Hum brand strategy, performance marketing aur creative design mein specialize karte hain.
@@ -119,8 +116,8 @@ export default function AboutUs() {
             </p>
 
             <div className="actions">
-              <button className="btn">Our Services</button>
-              <div className="subtle">Trusted by startups & scaleups</div>
+              <button className="btn-primary">Our Services</button>
+              <div className="trusted-text">Trusted by startups & scaleups</div>
             </div>
 
             {/* animated waves ONLY behind the text */}
@@ -129,19 +126,19 @@ export default function AboutUs() {
                 {/* layer 1 */}
                 <svg viewBox="0 0 1200 200" preserveAspectRatio="none" className="w1">
                   <path d="M0,80 C200,20 400,140 600,90 C800,40 1000,130 1200,80 L1200,200 L0,200 Z"
-                        fill="#0b1a26"/>
+                        fill="#e0f2fe"/>
                   <path className="crest-line" d="M0,80 C200,20 400,140 600,90 C800,40 1000,130 1200,80" />
                 </svg>
                 {/* layer 2 */}
                 <svg viewBox="0 0 1200 200" preserveAspectRatio="none" className="w2">
                   <path d="M0,100 C200,60 400,10 600,95 C800,180 1000,40 1200,100 L1200,200 L0,200 Z"
-                        fill="#07121a"/>
+                        fill="#f0f9ff"/>
                   <path className="crest-line" d="M0,100 C200,60 400,10 600,95 C800,180 1000,40 1200,100" />
                 </svg>
                 {/* layer 3 (front subtle) */}
                 <svg viewBox="0 0 1200 200" preserveAspectRatio="none" className="w3">
                   <path d="M0,60 C200,130 400,20 600,70 C800,120 1000,40 1200,60 L1200,200 L0,200 Z"
-                        fill="#091421"/>
+                        fill="#f8fafc"/>
                   <path className="crest-line" d="M0,60 C200,130 400,20 600,70 C800,120 1000,40 1200,60" />
                 </svg>
               </div>
@@ -153,16 +150,17 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* Original Content Sections */}
+      {/* Main Content Section with Consistent Blue Background */}
       <section 
         className="relative py-20 md:py-32 px-4 overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #0A0A0A 0%, #141414 50%, #0A0A0A 100%)'
+          backgroundColor: '#f0f9ff',
+          backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)'
         }}
       >
         {/* Decorative Elements */}
-        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500 rounded-full opacity-5 blur-3xl animate-float" />
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-cyan-500 rounded-full opacity-5 blur-3xl" style={{ animation: 'float 14s ease-in-out infinite', animationDelay: '4s' }} />
+        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-300 rounded-full opacity-20 blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-indigo-300 rounded-full opacity-20 blur-3xl" style={{ animation: 'float 14s ease-in-out infinite', animationDelay: '4s' }} />
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Header */}
@@ -173,10 +171,10 @@ export default function AboutUs() {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-text-admark">
+            <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-text-new">
               About AdMark
             </h2>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+            <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed font-medium text-slate-800">
               We're not just another agency - we're your growth partners. Since 2018, we've been magnetizing customers to brands through innovative, data-driven digital marketing strategies.
             </p>
           </motion.div>
@@ -190,16 +188,13 @@ export default function AboutUs() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center p-8 rounded-2xl glassmorphism-strong"
-                style={{
-                  border: '2px solid rgba(0, 240, 255, 0.2)',
-                }}
+                className="text-center p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-blue-100 hover:border-blue-300 card-hover"
               >
-                <div className="text-5xl mb-4">{stat.icon}</div>
-                <div className="text-4xl font-black mb-2 gradient-text-cyan-pink">
+                <div className="text-4xl mb-4">{stat.icon}</div>
+                <div className="text-3xl font-black mb-2 text-slate-800">
                   {stat.number}
                 </div>
-                <div className="text-sm font-semibold" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                <div className="text-sm font-semibold text-slate-600">
                   {stat.label}
                 </div>
               </motion.div>
@@ -213,20 +208,13 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="p-10 rounded-2xl glassmorphism-strong"
-              style={{
-                border: '2px solid rgba(0, 240, 255, 0.3)',
-                boxShadow: '0 0 40px rgba(0, 240, 255, 0.2)',
-              }}
+              className="p-10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 bg-white border-2 border-blue-200 card-hover"
             >
-              <h3 className="text-3xl font-bold mb-6" style={{
-                background: 'linear-gradient(90deg, #FFD700 0%, #DAA520 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                🎯 Our Mission
+              <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-blue-700">
+                <span className="text-4xl">🎯</span>
+                Our Mission
               </h3>
-              <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+              <p className="text-lg leading-relaxed text-slate-700 font-medium">
                 To magnetize growth for businesses worldwide by delivering innovative, data-driven digital marketing solutions that generate measurable results and exceed expectations.
               </p>
             </motion.div>
@@ -236,20 +224,13 @@ export default function AboutUs() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="p-10 rounded-2xl glassmorphism-strong"
-              style={{
-                border: '2px solid rgba(255, 0, 110, 0.3)',
-                boxShadow: '0 0 40px rgba(255, 0, 110, 0.2)',
-              }}
+              className="p-10 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 bg-white border-2 border-indigo-200 card-hover"
             >
-              <h3 className="text-3xl font-bold mb-6" style={{
-                background: 'linear-gradient(90deg, #FFD700 0%, #DAA520 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                🚀 Our Vision
+              <h3 className="text-3xl font-bold mb-6 flex items-center gap-3 text-indigo-700">
+                <span className="text-4xl">🚀</span>
+                Our Vision
               </h3>
-              <p className="text-lg leading-relaxed" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+              <p className="text-lg leading-relaxed text-slate-700 font-medium">
                 To become the world's most trusted digital marketing partner, empowering businesses of all sizes to achieve exponential growth through cutting-edge technology and creative excellence.
               </p>
             </motion.div>
@@ -263,7 +244,7 @@ export default function AboutUs() {
             viewport={{ once: true }}
             className="mb-20"
           >
-            <h3 className="text-4xl font-bold text-center mb-12 gradient-text-admark">
+            <h3 className="text-4xl font-bold text-center mb-12 text-slate-800">
               Our Core Values
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -274,16 +255,16 @@ export default function AboutUs() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="p-6 rounded-2xl glassmorphism-strong text-center card-hover-effect"
+                  className="p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-slate-200 card-hover group"
                   style={{
-                    border: `2px solid ${value.color}30`,
+                    borderTop: `4px solid ${value.color}`,
                   }}
                 >
-                  <div className="text-5xl mb-4">{value.icon}</div>
-                  <h4 className="text-xl font-bold mb-3" style={{ color: value.color }}>
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{value.icon}</div>
+                  <h4 className="text-xl font-bold mb-3 text-slate-800">
                     {value.title}
                   </h4>
-                  <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {value.description}
                   </p>
                 </motion.div>
@@ -298,7 +279,7 @@ export default function AboutUs() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-4xl font-bold text-center mb-12 gradient-text-cyan-pink">
+            <h3 className="text-4xl font-bold text-center mb-12 text-slate-800">
               Why Choose AdMark?
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -309,26 +290,26 @@ export default function AboutUs() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="p-6 rounded-2xl glassmorphism-strong card-hover-effect"
+                  className="p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-white border-2 border-slate-200 card-hover group"
                   style={{
-                    border: `2px solid ${item.color}20`,
+                    borderLeft: `4px solid ${item.color}`,
                   }}
                 >
                   <div className="flex items-start gap-4">
                     <div 
-                      className="text-3xl w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                      className="text-2xl w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 border-2"
                       style={{
-                        background: `${item.color}20`,
-                        border: `2px solid ${item.color}50`,
+                        background: `${item.color}15`,
+                        borderColor: `${item.color}40`,
                       }}
                     >
                       {item.icon}
                     </div>
                     <div>
-                      <h4 className="text-lg font-bold mb-2" style={{ color: item.color }}>
+                      <h4 className="text-lg font-bold mb-2 text-slate-800">
                         {item.title}
                       </h4>
-                      <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                      <p className="text-sm text-slate-600 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -346,22 +327,22 @@ export default function AboutUs() {
             viewport={{ once: true }}
             className="text-center mt-20"
           >
-            <h3 className="text-3xl font-bold mb-6" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+            <h3 className="text-3xl font-bold mb-6 text-slate-800">
               Ready to Experience the AdMark Difference?
             </h3>
             <button
-              className="px-10 py-5 rounded-full font-bold text-lg transition-all duration-300"
+              className="px-10 py-5 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl border-2 border-blue-600"
               style={{
-                background: 'linear-gradient(90deg, #00F0FF 0%, #FF006E 100%)',
-                boxShadow: '0 0 30px rgba(0, 240, 255, 0.4)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
+                color: 'white',
               }}
               onMouseEnter={(e) => {
-                e.target.style.transform = 'scale(1.05)';
-                e.target.style.boxShadow = '0 0 50px rgba(255, 0, 110, 0.6)';
+                e.target.style.background = 'linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%)';
+                e.target.style.boxShadow = '0 20px 40px rgba(37, 99, 235, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.transform = 'scale(1)';
-                e.target.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.4)';
+                e.target.style.background = 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)';
+                e.target.style.boxShadow = '0 10px 20px rgba(37, 99, 235, 0.2)';
               }}
             >
               Let's Talk About Your Growth 💬
@@ -372,10 +353,10 @@ export default function AboutUs() {
 
       <style jsx>{`
         :root{
-          --bg:#07070b;
-          --panel:#0d1116;
-          --gold:#d4af37;
-          --muted:#bfc4cc;
+          --bg:#f0f9ff;
+          --panel:#ffffff;
+          --primary:#2563eb;
+          --muted:#64748b;
           --height:34vh;
           --maxw:1200px;
         }
@@ -391,6 +372,7 @@ export default function AboutUs() {
           justify-content:center;
           padding:0 12px;
           margin: 0 auto;
+          background: var(--bg);
         }
 
         .wave-shape{
@@ -423,8 +405,9 @@ export default function AboutUs() {
           width:92%;
           height:auto;
           border-radius:14px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
           transform: translateX(-6px);
+          border: 2px solid #e0f2fe;
         }
 
         .about-text{
@@ -440,37 +423,50 @@ export default function AboutUs() {
         }
 
         .about-text h2{
-          color:#ffffff;
+          color:#1e293b;
           font-size:1.5rem;
           margin-bottom:6px;
           letter-spacing:0.2px;
           font-weight:700;
         }
         .about-text p{
-          color:#cfd7e0;
+          color:#475569;
           line-height:1.45;
           margin:0 0 8px 0;
           font-size:0.98rem;
+          font-weight:500;
         }
-        .accent{ color:var(--gold); font-weight:600; }
-        .subtle{ color: var(--muted); font-size: 0.9rem; }
+        .accent{ color:var(--primary); font-weight:600; }
+        .section-badge{ 
+          color: var(--primary); 
+          font-size: 0.9rem; 
+          font-weight:700;
+          background: rgba(37, 99, 235, 0.1);
+          padding: 6px 12px;
+          border-radius: 20px;
+          display: inline-block;
+          border: 1px solid rgba(37, 99, 235, 0.2);
+          margin-bottom: 8px;
+        }
 
         .actions{ display:flex; gap:12px; align-items:center; margin-top:6px; }
-        .btn{
-          background:transparent;
-          color:var(--gold);
-          border:1.2px solid rgba(212,175,55,0.9);
+        .btn-primary{
+          background:var(--primary);
+          color:white;
+          border:2px solid var(--primary);
           padding:10px 14px;
           border-radius:10px;
           font-weight:600;
           cursor:pointer;
-          backdrop-filter: blur(4px);
           transition: all 0.3s ease;
         }
-        .btn:hover{
-          background: rgba(212,175,55,0.1);
-          box-shadow: 0 0 20px rgba(212,175,55,0.3);
+        .btn-primary:hover{
+          background: #1d4ed8;
+          border-color: #1d4ed8;
+          box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+          transform: translateY(-2px);
         }
+        .trusted-text{ color: var(--muted); font-size: 0.9rem; font-weight:600; }
 
         .text-wave-wrap{
           position:absolute;
@@ -488,7 +484,6 @@ export default function AboutUs() {
           width:130%;
           height:100%;
           opacity:0.95;
-          mix-blend-mode:screen;
         }
 
         .text-wave svg{ width:100%; height:100%; display:block; }
@@ -507,7 +502,7 @@ export default function AboutUs() {
           0%{ transform:translateX(-8%);} 50%{ transform:translateX(20%);} 100%{ transform:translateX(-8%);}
         }
 
-        .crest-line{ stroke: rgba(212,175,55,0.14); stroke-width:2.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+        .crest-line{ stroke: rgba(37, 99, 235, 0.2); stroke-width:2.6; fill:none; stroke-linecap:round; stroke-linejoin:round; }
 
         .air{
           position:absolute;
@@ -515,12 +510,30 @@ export default function AboutUs() {
           z-index:1;
           pointer-events:none;
           opacity:0.05;
-          mix-blend-mode:screen;
           background-image:
-            radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-            radial-gradient(rgba(255,255,255,0.01) 1px, transparent 1px);
+            radial-gradient(rgba(37, 99, 235, 0.02) 1px, transparent 1px),
+            radial-gradient(rgba(37, 99, 235, 0.01) 1px, transparent 1px);
           background-size:140px 140px, 220px 220px;
           filter: blur(0.2px);
+        }
+
+        .gradient-text-new {
+          background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #dc2626 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .card-hover {
+          transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+          transform: translateY(-5px);
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(1deg); }
         }
 
         @media (max-width:980px){
@@ -538,33 +551,6 @@ export default function AboutUs() {
           .text-wave .w1,
           .text-wave .w2,
           .text-wave .w3 { animation: none !important; }
-        }
-
-        .gradient-text-admark {
-          background: linear-gradient(90deg, #FFD700 0%, #DAA520 50%, #FFD700 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .gradient-text-cyan-pink {
-          background: linear-gradient(90deg, #00F0FF 0%, #FF006E 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .glassmorphism-strong {
-          background: rgba(15, 15, 25, 0.7);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-        }
-
-        .card-hover-effect {
-          transition: all 0.3s ease;
-        }
-        .card-hover-effect:hover {
-          transform: translateY(-5px);
         }
       `}</style>
     </div>

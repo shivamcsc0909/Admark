@@ -267,3 +267,10 @@ p {
   outline: 2px solid #00F0FF;
   outline-offset: 4px;
 }
+#fluid {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+}

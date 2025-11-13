@@ -23,6 +23,35 @@ const initCursor = () => {
     TRANSPARENT: true,
   };
 
+  // Function to check if background is light or dark
+  const isLightBackground = () => {
+    const bodyStyle = window.getComputedStyle(document.body);
+    const bgColor = bodyStyle.backgroundColor;
+    
+    // If background color is transparent, check the root element
+    if (bgColor === 'rgba(0, 0, 0, 0)' || bgColor === 'transparent') {
+      const htmlStyle = window.getComputedStyle(document.documentElement);
+      const htmlBgColor = htmlStyle.backgroundColor;
+      return getBrightness(htmlBgColor) > 128;
+    }
+    
+    return getBrightness(bgColor) > 128;
+  };
+
+  // Function to calculate brightness of a color
+  const getBrightness = (color) => {
+    // Parse RGB values from color string
+    const rgb = color.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      // Calculate brightness using luminance formula
+      return (r * 299 + g * 587 + b * 114) / 1000;
+    }
+    return 128; // Default to medium brightness if can't parse
+  };
+
   function pointerPrototype() {
     this.id = -1;
     this.texcoordX = 0;
@@ -1074,11 +1103,23 @@ const initCursor = () => {
   }
 
   function generateColor() {
-    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-    c.r *= 0.10;
-    c.g *= 0.10;
-    c.b *= 0.10;
-    return c;
+    const lightBg = isLightBackground();
+    
+    if (lightBg) {
+      // Light background - generate dark colors
+      let c = HSVtoRGB(Math.random(), 1.0, 0.3); // Lower value for darker colors
+      c.r *= 0.15;
+      c.g *= 0.15;
+      c.b *= 0.15;
+      return c;
+    } else {
+      // Dark background - generate light colors  
+      let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+      c.r *= 0.10;
+      c.g *= 0.10;
+      c.b *= 0.10;
+      return c;
+    }
   }
 
   function HSVtoRGB(h, s, v) {

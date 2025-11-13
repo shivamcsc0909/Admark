@@ -4,6 +4,8 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [formData, setFormData] = useState({
     websiteUrl: '',
     websiteName: '',
@@ -21,20 +23,22 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Case Studies', href: '#case-studies' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'About', href: '#about' },
-    { name: 'Our Team', href: '#teamsection' },
-    { name: 'FAQ', href: '#faq' }
+    { name: 'Home', href: '#home', icon: '🏠' },
+    { name: 'Services', href: '/services', icon: '⚡' },
+    { name: 'Portfolio', href: '/portfolio', icon: '💼' },
+    { name: 'About', href: '/about', icon: '👥' },
+    { name: 'Blog', href: '/blog', icon: '📝' },
+    { name: 'FAQ', href: '/faq', icon: '❓' },
+    { name: 'Testimonial', href: '/testimonial', icon: '⭐' }
   ];
 
   const handleSmoothScroll = (e, href) => {
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -48,11 +52,9 @@ export default function Navbar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can add your form submission logic
     console.log('Form submitted:', formData);
     setIsSubmitted(true);
     
-    // Reset form after 3 seconds and close popup
     setTimeout(() => {
       setIsSubmitted(false);
       setIsPopupOpen(false);
@@ -63,6 +65,15 @@ export default function Navbar() {
         phone: ''
       });
     }, 3000);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      console.log('Search query:', searchQuery);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
   };
 
   const openPopup = () => {
@@ -81,7 +92,15 @@ export default function Navbar() {
     });
   };
 
-  // Free Audit Popup Component
+  const openSearch = () => {
+    setIsSearchOpen(true);
+  };
+
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+    setSearchQuery('');
+  };
+
   const FreeAuditPopup = () => {
     if (!isPopupOpen) return null;
 
@@ -92,7 +111,7 @@ export default function Navbar() {
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -100,44 +119,42 @@ export default function Navbar() {
         backdropFilter: 'blur(10px)'
       }}>
         <div style={{
-          background: 'linear-gradient(135deg, rgba(26, 29, 34, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%)',
-          borderRadius: '20px',
-          padding: '40px',
-          width: '90%',
-          maxWidth: '500px',
-          border: '2px solid rgba(255, 215, 0, 0.3)',
-          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.8)',
-          position: 'relative',
-          backdropFilter: 'blur(20px)'
+          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)',
+          borderRadius: '12px',
+          padding: '30px',
+          width: '95%',
+          maxWidth: '450px',
+          border: '2px solid #00ff00',
+          boxShadow: '0 10px 40px rgba(0, 255, 0, 0.2)',
+          position: 'relative'
         }}>
-          {/* Close Button */}
           <button
             onClick={closePopup}
             style={{
               position: 'absolute',
-              top: '15px',
-              right: '20px',
-              background: 'none',
-              border: 'none',
-              color: '#FFD700',
-              fontSize: '24px',
+              top: '12px',
+              right: '15px',
+              background: '#333',
+              border: '1px solid #00ff00',
+              color: '#00ff00',
+              fontSize: '18px',
               cursor: 'pointer',
-              padding: '5px',
+              padding: '4px',
               borderRadius: '50%',
-              width: '40px',
-              height: '40px',
+              width: '32px',
+              height: '32px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
-              e.target.style.background = 'rgba(255, 215, 0, 0.1)';
-              e.target.style.transform = 'scale(1.1)';
+              e.target.style.background = '#00ff00';
+              e.target.style.color = '#000';
             }}
             onMouseLeave={(e) => {
-              e.target.style.background = 'none';
-              e.target.style.transform = 'scale(1)';
+              e.target.style.background = '#333';
+              e.target.style.color = '#00ff00';
             }}
           >
             ×
@@ -146,25 +163,26 @@ export default function Navbar() {
           {!isSubmitted ? (
             <>
               <h2 style={{
-                color: '#FFD700',
+                color: '#00ff00',
                 textAlign: 'center',
-                marginBottom: '30px',
+                marginBottom: '25px',
                 fontSize: '28px',
                 fontWeight: '700',
-                fontFamily: "'Inter', sans-serif",
-                textShadow: '0 2px 10px rgba(255, 215, 0, 0.3)'
+                fontFamily: "'Dancing Script', cursive",
+                textShadow: '0 2px 10px rgba(0, 255, 0, 0.3)'
               }}>
                 Free Website Audit
               </h2>
               
               <form onSubmit={handleSubmit}>
-                <div style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: '18px' }}>
                   <label style={{
                     display: 'block',
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    color: '#00ff00',
                     marginBottom: '8px',
-                    fontWeight: '500',
-                    fontFamily: "'Inter', sans-serif"
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    fontFamily: "'Dancing Script', cursive"
                   }}>
                     Website URL *
                   </label>
@@ -176,33 +194,33 @@ export default function Navbar() {
                     required
                     style={{
                       width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '2px solid rgba(255, 215, 0, 0.3)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      color: 'white',
-                      fontSize: '16px',
-                      transition: 'all 0.3s ease',
-                      backdropFilter: 'blur(10px)'
+                      padding: '12px',
+                      borderRadius: '6px',
+                      border: '1px solid #00ff00',
+                      background: '#0a0a0a',
+                      color: '#fff',
+                      fontSize: '14px',
+                      transition: 'all 0.3s ease'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#FFD700';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.borderColor = '#33ff33';
+                      e.target.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = 'rgba(255, 215, 0, 0.3)';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                      e.target.style.borderColor = '#00ff00';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
 
-                <div style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: '18px' }}>
                   <label style={{
                     display: 'block',
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    color: '#00ff00',
                     marginBottom: '8px',
-                    fontWeight: '500',
-                    fontFamily: "'Inter', sans-serif"
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    fontFamily: "'Dancing Script', cursive"
                   }}>
                     Website Name *
                   </label>
@@ -214,33 +232,33 @@ export default function Navbar() {
                     required
                     style={{
                       width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '2px solid rgba(255, 215, 0, 0.3)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      color: 'white',
-                      fontSize: '16px',
-                      transition: 'all 0.3s ease',
-                      backdropFilter: 'blur(10px)'
+                      padding: '12px',
+                      borderRadius: '6px',
+                      border: '1px solid #00ff00',
+                      background: '#0a0a0a',
+                      color: '#fff',
+                      fontSize: '14px',
+                      transition: 'all 0.3s ease'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#FFD700';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.borderColor = '#33ff33';
+                      e.target.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = 'rgba(255, 215, 0, 0.3)';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                      e.target.style.borderColor = '#00ff00';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
 
-                <div style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: '18px' }}>
                   <label style={{
                     display: 'block',
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    color: '#00ff00',
                     marginBottom: '8px',
-                    fontWeight: '500',
-                    fontFamily: "'Inter', sans-serif"
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    fontFamily: "'Dancing Script', cursive"
                   }}>
                     Email Address *
                   </label>
@@ -252,33 +270,33 @@ export default function Navbar() {
                     required
                     style={{
                       width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '2px solid rgba(255, 215, 0, 0.3)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      color: 'white',
-                      fontSize: '16px',
-                      transition: 'all 0.3s ease',
-                      backdropFilter: 'blur(10px)'
+                      padding: '12px',
+                      borderRadius: '6px',
+                      border: '1px solid #00ff00',
+                      background: '#0a0a0a',
+                      color: '#fff',
+                      fontSize: '14px',
+                      transition: 'all 0.3s ease'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#FFD700';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.borderColor = '#33ff33';
+                      e.target.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = 'rgba(255, 215, 0, 0.3)';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                      e.target.style.borderColor = '#00ff00';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
 
-                <div style={{ marginBottom: '30px' }}>
+                <div style={{ marginBottom: '25px' }}>
                   <label style={{
                     display: 'block',
-                    color: 'rgba(255, 255, 255, 0.7)',
+                    color: '#00ff00',
                     marginBottom: '8px',
-                    fontWeight: '500',
-                    fontFamily: "'Inter', sans-serif"
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    fontFamily: "'Dancing Script', cursive"
                   }}>
                     Phone Number (Optional)
                   </label>
@@ -289,22 +307,21 @@ export default function Navbar() {
                     onChange={handleInputChange}
                     style={{
                       width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '2px solid rgba(255, 215, 0, 0.2)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      color: 'white',
-                      fontSize: '16px',
-                      transition: 'all 0.3s ease',
-                      backdropFilter: 'blur(10px)'
+                      padding: '12px',
+                      borderRadius: '6px',
+                      border: '1px solid #00ff00',
+                      background: '#0a0a0a',
+                      color: '#fff',
+                      fontSize: '14px',
+                      transition: 'all 0.3s ease'
                     }}
                     onFocus={(e) => {
-                      e.target.style.borderColor = '#FFD700';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                      e.target.style.borderColor = '#33ff33';
+                      e.target.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = 'rgba(255, 215, 0, 0.2)';
-                      e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                      e.target.style.borderColor = '#00ff00';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                 </div>
@@ -313,25 +330,27 @@ export default function Navbar() {
                   type="submit"
                   style={{
                     width: '100%',
-                    padding: '15px',
-                    borderRadius: '12px',
-                    background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
-                    color: '#1a1d22',
+                    padding: '14px',
+                    borderRadius: '6px',
+                    background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                    color: '#000',
                     border: 'none',
-                    fontSize: '18px',
                     fontWeight: '700',
                     cursor: 'pointer',
+                    fontFamily: "'Dancing Script', cursive",
+                    fontSize: '18px',
                     transition: 'all 0.3s ease',
-                    boxShadow: '0 8px 25px rgba(255, 215, 0, 0.4)',
-                    fontFamily: "'Inter', sans-serif"
+                    textShadow: '0 1px 2px rgba(0,0,0,0.3)'
                   }}
                   onMouseEnter={(e) => {
+                    e.target.style.background = 'linear-gradient(135deg, #33ff33, #00ff00)';
                     e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 12px 35px rgba(255, 215, 0, 0.6)';
+                    e.target.style.boxShadow = '0 5px 15px rgba(0, 255, 0, 0.4)';
                   }}
                   onMouseLeave={(e) => {
+                    e.target.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
                     e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = '0 8px 25px rgba(255, 215, 0, 0.4)';
+                    e.target.style.boxShadow = 'none';
                   }}
                 >
                   Submit for Free Audit
@@ -339,30 +358,25 @@ export default function Navbar() {
               </form>
             </>
           ) : (
-            <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-              <div style={{
-                fontSize: '60px',
-                marginBottom: '20px',
-                filter: 'drop-shadow(0 0 10px rgba(255, 215, 0, 0.5))'
-              }}>
-                ✅
-              </div>
-              <h3 style={{
-                color: '#FFD700',
-                fontSize: '24px',
-                marginBottom: '15px',
+            <div style={{ textAlign: 'center', padding: '20px' }}>
+              <div style={{ fontSize: '50px', marginBottom: '15px' }}>✅</div>
+              <h3 style={{ 
+                color: '#00ff00', 
+                fontSize: '24px', 
+                marginBottom: '12px', 
                 fontWeight: '700',
-                fontFamily: "'Inter', sans-serif"
+                fontFamily: "'Dancing Script', cursive",
+                textShadow: '0 2px 10px rgba(0, 255, 0, 0.3)'
               }}>
-                Request Submitted Successfully!
+                Request Submitted!
               </h3>
-              <p style={{
-                color: 'rgba(255, 255, 255, 0.9)',
+              <p style={{ 
+                color: '#ccc', 
                 fontSize: '16px',
-                lineHeight: '1.6',
-                fontFamily: "'Inter', sans-serif"
+                fontFamily: "'Dancing Script', cursive",
+                lineHeight: '1.5'
               }}>
-                Your request for free audit report has been successfully submitted and your free audit report will soon be sent to your email inbox. Thank you!
+                Your free audit report will be sent to your email within 24 hours.
               </p>
             </div>
           )}
@@ -371,383 +385,491 @@ export default function Navbar() {
     );
   };
 
+  const SearchPopup = () => {
+    if (!isSearchOpen) return null;
+
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.95)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10000,
+        backdropFilter: 'blur(10px)'
+      }}>
+        <div style={{
+          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)',
+          borderRadius: '12px',
+          padding: '30px',
+          width: '95%',
+          maxWidth: '450px',
+          border: '2px solid #00ff00',
+          boxShadow: '0 10px 40px rgba(0, 255, 0, 0.2)',
+          position: 'relative'
+        }}>
+          <button
+            onClick={closeSearch}
+            style={{
+              position: 'absolute',
+              top: '12px',
+              right: '15px',
+              background: '#333',
+              border: '1px solid #00ff00',
+              color: '#00ff00',
+              fontSize: '18px',
+              cursor: 'pointer',
+              padding: '4px',
+              borderRadius: '50%',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = '#00ff00';
+              e.target.style.color = '#000';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = '#333';
+              e.target.style.color = '#00ff00';
+            }}
+          >
+            ×
+          </button>
+
+          <h2 style={{
+            color: '#00ff00',
+            textAlign: 'center',
+            marginBottom: '25px',
+            fontSize: '28px',
+            fontWeight: '700',
+            fontFamily: "'Dancing Script', cursive",
+            textShadow: '0 2px 10px rgba(0, 255, 0, 0.3)'
+          }}>
+            Search Our Site
+          </h2>
+          
+          <form onSubmit={handleSearchSubmit}>
+            <div style={{ marginBottom: '25px' }}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="What you're looking for..."
+                required
+                style={{
+                  width: '100%',
+                  padding: '14px',
+                  borderRadius: '6px',
+                  border: '1px solid #00ff00',
+                  background: '#0a0a0a',
+                  color: '#fff',
+                  fontSize: '16px',
+                  transition: 'all 0.3s ease'
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = '#33ff33';
+                  e.target.style.boxShadow = '0 0 15px rgba(0, 255, 0, 0.3)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = '#00ff00';
+                  e.target.style.boxShadow = 'none';
+                }}
+              />
+            </div>
+
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                padding: '14px',
+                borderRadius: '6px',
+                background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                color: '#000',
+                border: 'none',
+                fontWeight: '700',
+                cursor: 'pointer',
+                fontFamily: "'Dancing Script', cursive",
+                fontSize: '18px',
+                transition: 'all 0.3s ease',
+                textShadow: '0 1px 2px rgba(0,0,0,0.3)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #33ff33, #00ff00)';
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 5px 15px rgba(0, 255, 0, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+              }}
+            >
+              Search Now
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
-      {/* Desktop Layout - New Structural Design */}
+      {/* Add Google Fonts for cursive style */}
+      <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Great+Vibes&family=Pacifico&display=swap"
+        rel="stylesheet"
+      />
+
+      {/* Desktop Vertical Navbar - IMPROVED VERSION */}
       <div className="hidden lg:block">
         <nav 
-          className="fixed top-0 left-0 right-0 z-[999] transition-all duration-500"
+          className="fixed top-0 left-0 h-full z-[999] transition-all duration-500"
           style={{
-            display: 'flex',
-            justifyContent: 'center',
-            width: '100%',
-            padding: '12px 0',
-            background: 'transparent'
+            width: '160px', // Optimized width
+            background: 'rgba(0, 0, 0, 0.98)',
+            backdropFilter: 'blur(15px)',
+            borderRight: '2px solid #00ff00',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            boxShadow: '5px 0 25px rgba(0, 255, 0, 0.1)'
           }}
         >
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
-              padding: '12px 40px',
-              background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 29, 34, 0.9) 100%)',
-              backdropFilter: 'blur(20px)',
-              borderRadius: '25px',
-              width: '95%',
-              maxWidth: '1400px',
-              gap: '30px',
-              border: '1px solid rgba(255, 215, 0, 0.15)',
-              boxShadow: `
-                0 8px 32px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.5)
-              `,
-              position: 'relative',
-              overflow: 'hidden',
+              flexDirection: 'column',
+              height: '100%',
+              padding: '15px 10px'
             }}
           >
-            {/* Animated Background Elements */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: `
-                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.02) 0%, transparent 50%)
-              `,
-              zIndex: 0,
-            }}></div>
-
-            {/* Mega Logo - Left Side with Enhanced 3D Effect */}
+            {/* Logo Container - Improved */}
             <div style={{ 
-              flexShrink: 0, 
-              background: 'transparent',
-              position: 'relative',
-              zIndex: 1,
-              transform: 'perspective(1000px) rotateY(-5deg)',
-              transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-              filter: 'drop-shadow(0 8px 25px rgba(0, 0, 0, 0.7))',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'perspective(1000px) rotateY(-5deg) scale(1.1) translateY(-2px)';
-              e.currentTarget.style.filter = 'drop-shadow(0 12px 35px rgba(255, 215, 0, 0.3))';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'perspective(1000px) rotateY(-5deg) scale(1)';
-              e.currentTarget.style.filter = 'drop-shadow(0 8px 25px rgba(0, 0, 0, 0.7))';
-            }}
-            >
+              textAlign: 'center',
+              marginBottom: '20px',
+              padding: '10px 0'
+            }}>
               <a href="#home">
-                <img 
-                  src="/src/assets/comp-logo.png"
-                  alt="AdMark Digital Media"
-                  className="h-16 w-auto transition-all duration-500"
-                  style={{
-                    filter: `
-                      brightness(1.3) 
-                      contrast(1.4) 
-                      drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8))
-                      drop-shadow(0 0 20px rgba(255, 215, 0, 0.4))
-                    `,
-                  }}
-                />
+                <div style={{
+                  width: '60px',
+                  height: '60px',
+                  margin: '0 auto',
+                  borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px solid #00ff00',
+                  boxShadow: '0 0 20px rgba(0, 255, 0, 0.4)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(1.05)';
+                  e.target.style.boxShadow = '0 0 25px rgba(0, 255, 0, 0.6)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                  e.target.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.4)';
+                }}
+                >
+                  <span style={{
+                    color: '#000',
+                    fontWeight: 'bold',
+                    fontSize: '12px',
+                    fontFamily: "'Pacifico', cursive"
+                  }}>
+                    LOGO
+                  </span>
+                </div>
+                <div style={{ marginTop: '8px' }}>
+                  <span style={{
+                    color: '#00ff00',
+                    fontSize: '16px',
+                    fontFamily: "'Pacifico', cursive",
+                    fontWeight: 'bold',
+                    textShadow: '0 2px 8px rgba(0, 255, 0, 0.3)'
+                  }}>
+                    ADMARK
+                  </span>
+                </div>
               </a>
             </div>
 
-            {/* Navigation Links - Center with Glass Morphism Effect */}
+            {/* Navigation Links - Improved */}
             <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
               flex: 1,
-              gap: '4px',
-              position: 'relative',
-              zIndex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px',
+              padding: '0 5px'
             }}>
               {navLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.href}
                   onClick={(e) => handleSmoothScroll(e, link.href)}
-                  className="transition-all duration-400"
                   style={{
-                    color: 'rgba(255, 255, 255, 0.9)',
+                    color: '#ffffff',
                     textDecoration: 'none',
-                    fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-                    fontSize: '0.92rem',
-                    fontWeight: '500',
-                    padding: '10px 16px',
-                    textAlign: 'center',
-                    display: 'inline-block',
-                    whiteSpace: 'nowrap',
-                    borderRadius: '12px',
+                    fontSize: '15px',
+                    fontWeight: '600',
+                    padding: '10px 12px',
+                    borderRadius: '6px',
                     background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(10px)',
-                    letterSpacing: '0.02em',
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    border: '1px solid #333',
+                    transition: 'all 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    fontFamily: "'Dancing Script', cursive",
+                    minHeight: '45px',
+                    textShadow: '0 1px 2px rgba(0,0,0,0.5)'
                   }}
                   onMouseEnter={(e) => {
-                    e.target.style.color = '#FFD700';
-                    e.target.style.background = 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%)';
-                    e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                    e.target.style.boxShadow = `
-                      0 8px 25px rgba(255, 215, 0, 0.25),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.2)
-                    `;
-                    e.target.style.border = '1px solid rgba(255, 215, 0, 0.4)';
+                    e.target.style.background = 'rgba(0, 255, 0, 0.2)';
+                    e.target.style.border = '1px solid #00ff00';
+                    e.target.style.transform = 'translateX(3px)';
+                    e.target.style.boxShadow = '0 3px 12px rgba(0, 255, 0, 0.2)';
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.color = 'rgba(255, 255, 255, 0.9)';
                     e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.target.style.transform = 'translateY(0) scale(1)';
+                    e.target.style.border = '1px solid #333';
+                    e.target.style.transform = 'translateX(0)';
                     e.target.style.boxShadow = 'none';
-                    e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
                   }}
                 >
-                  {link.name}
+                  <span style={{ fontSize: '16px', width: '20px', textAlign: 'center' }}>{link.icon}</span>
+                  <span style={{ 
+                    whiteSpace: 'nowrap', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    fontSize: '15px'
+                  }}>
+                    {link.name}
+                  </span>
                 </a>
               ))}
             </div>
 
-            {/* CTA Buttons - Right Side with Circular Animation */}
+            {/* Action Buttons - Improved */}
             <div style={{ 
               display: 'flex', 
-              alignItems: 'center', 
-              gap: '15px',
-              flexShrink: 0,
-              position: 'relative',
-              zIndex: 1,
+              flexDirection: 'column',
+              gap: '8px',
+              marginTop: '15px',
+              padding: '15px 5px 5px 5px',
+              borderTop: '1px solid #333'
             }}>
-              {/* Pricing Plan Button with Circular Border Animation */}
-              <a
-                href="#pricing"
-                onClick={(e) => handleSmoothScroll(e, '#pricing')}
-                className="transition-all duration-500"
+              <button
+                onClick={openSearch}
                 style={{
-                  padding: '12px 28px',
-                  borderRadius: '30px',
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid #444',
+                  color: '#00ff00',
+                  cursor: 'pointer',
+                  fontSize: '15px',
                   fontWeight: '600',
-                  fontSize: '0.9rem',
-                  background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 29, 34, 0.8) 100%)',
-                  border: '2px solid rgba(255, 215, 0, 0.3)',
-                  color: '#FFD700',
-                  fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-                  display: 'inline-flex',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   gap: '8px',
-                  whiteSpace: 'nowrap',
-                  textDecoration: 'none',
-                  boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)',
-                  letterSpacing: '0.03em',
-                  textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  position: 'relative',
-                  overflow: 'hidden',
+                  fontFamily: "'Dancing Script', cursive",
+                  minHeight: '45px',
+                  textShadow: '0 1px 2px rgba(0,0,0,0.5)'
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                  e.target.style.background = 'linear-gradient(135deg, rgba(26, 29, 34, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%)';
-                  e.target.style.boxShadow = '0 12px 30px rgba(255, 215, 0, 0.2)';
-                  e.target.style.border = '2px solid rgba(255, 215, 0, 0.6)';
-                  e.target.style.color = '#FFF8DC';
+                  e.target.style.background = 'rgba(0, 255, 0, 0.2)';
+                  e.target.style.border = '1px solid #00ff00';
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 3px 12px rgba(0, 255, 0, 0.2)';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.background = 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 29, 34, 0.8) 100%)';
-                  e.target.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.4)';
-                  e.target.style.border = '2px solid rgba(255, 215, 0, 0.3)';
-                  e.target.style.color = '#FFD700';
+                  e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                  e.target.style.border = '1px solid #444';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = 'none';
                 }}
               >
-                {/* Circular Animated Border */}
-                <div style={{
-                  position: 'absolute',
-                  top: '-3px',
-                  left: '-3px',
-                  right: '-3px',
-                  bottom: '-3px',
-                  borderRadius: '32px',
-                  background: 'conic-gradient(from 0deg, transparent, #FFD700, #FFA500, #FFD700, transparent)',
-                  zIndex: -1,
-                  animation: 'rotateBorder 3s linear infinite',
-                  opacity: 0.7,
-                }}></div>
-                
-                {/* Inner background to cover the rotating border */}
-                <div style={{
-                  position: 'absolute',
-                  top: '2px',
-                  left: '2px',
-                  right: '2px',
-                  bottom: '2px',
-                  borderRadius: '28px',
-                  background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 29, 34, 0.9) 100%)',
-                  zIndex: -1,
-                }}></div>
+                <span style={{ fontSize: '16px' }}>🔍</span>
+                <span>Search</span>
+              </button>
 
-                <span style={{ 
-                  fontSize: '1.4em',
-                  filter: 'drop-shadow(0 0 5px rgba(255, 215, 0, 0.8))',
-                  zIndex: 1,
-                  transform: 'scale(1.2)'
-                }}>
-                  💎
-                </span>
-                <span style={{ zIndex: 1 }}>Pricing Plan</span>
+              <a
+                href="/pricing"
+                onClick={(e) => handleSmoothScroll(e, "/pricing")}
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: '6px',
+                  fontWeight: '700',
+                  fontSize: '15px',
+                  background: 'rgba(0, 255, 0, 0.15)',
+                  border: '1px solid #00ff00',
+                  color: '#00ff00',
+                  textDecoration: 'none',
+                  textAlign: 'center',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  fontFamily: "'Dancing Script', cursive",
+                  minHeight: '45px',
+                  textShadow: '0 1px 2px rgba(0,0,0,0.5)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'rgba(0, 255, 0, 0.25)';
+                  e.target.style.transform = 'translateY(-1px)';
+                  e.target.style.boxShadow = '0 3px 12px rgba(0, 255, 0, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'rgba(0, 255, 0, 0.15)';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = 'none';
+                }}
+              >
+                <span style={{ fontSize: '16px' }}>💎</span>
+                <span>Pricing</span>
               </a>
 
-              {/* Free Audit Button - Premium Design */}
               <button
                 onClick={openPopup}
-                className="transition-all duration-500"
                 style={{
-                  padding: '12px 30px',
-                  borderRadius: '30px',
+                  padding: '12px 12px',
+                  borderRadius: '6px',
                   fontWeight: '700',
-                  fontSize: '0.9rem',
-                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
-                  color: '#1a1d22',
-                  fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-                  boxShadow: `
-                    0 8px 25px rgba(255, 215, 0, 0.5),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
-                    inset 0 -2px 0 rgba(0, 0, 0, 0.3)
-                  `,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  whiteSpace: 'nowrap',
-                  textDecoration: 'none',
-                  letterSpacing: '0.03em',
-                  textShadow: '0 1px 2px rgba(255, 255, 255, 0.4)',
-                  border: '2px solid rgba(255, 215, 0, 0.8)',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  position: 'relative',
-                  overflow: 'hidden',
+                  fontSize: '15px',
+                  background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                  color: '#000',
+                  border: 'none',
                   cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  fontFamily: "'Dancing Script', cursive",
+                  minHeight: '45px',
+                  textShadow: '0 1px 2px rgba(0,0,0,0.3)'
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-3px) scale(1.05)';
-                  e.target.style.background = 'linear-gradient(135deg, #FFA500 0%, #FF8C00 50%, #FF6B00 100%)';
-                  e.target.style.boxShadow = `
-                    0 12px 35px rgba(255, 165, 0, 0.7),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.5),
-                    inset 0 -2px 0 rgba(0, 0, 0, 0.4)
-                  `;
-                  e.target.style.color = '#000000';
-                  e.target.style.border = '2px solid rgba(255, 215, 0, 1)';
+                  e.target.style.background = 'linear-gradient(135deg, #33ff33, #00ff00)';
+                  e.target.style.transform = 'translateY(-2px)';
+                  e.target.style.boxShadow = '0 5px 15px rgba(0, 255, 0, 0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0) scale(1)';
-                  e.target.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)';
-                  e.target.style.boxShadow = `
-                    0 8px 25px rgba(255, 215, 0, 0.5),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.4),
-                    inset 0 -2px 0 rgba(0, 0, 0, 0.3)
-                  `;
-                  e.target.style.color = '#1a1d22';
-                  e.target.style.border = '2px solid rgba(255, 215, 0, 0.8)';
+                  e.target.style.background = 'linear-gradient(135deg, #00ff00, #00cc00)';
+                  e.target.style.transform = 'translateY(0)';
+                  e.target.style.boxShadow = 'none';
                 }}
               >
-                <span style={{ 
-                  fontSize: '1.4em',
-                  filter: 'drop-shadow(0 0 6px rgba(255, 0, 0, 0.6))',
-                  transform: 'scale(1.2)'
-                }}>
-                  🎯
-                </span>
-                Free Audit
+                <span style={{ fontSize: '16px' }}>🎯</span>
+                <span>Free Audit</span>
               </button>
             </div>
           </div>
         </nav>
       </div>
 
-      {/* Mobile Header - Enhanced Design */}
+      {/* Mobile Horizontal Navbar - Improved */}
       <nav 
         className="lg:hidden fixed top-0 left-0 right-0 z-[999] transition-all duration-500"
         style={{
-          background: isScrolled 
-            ? 'linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(26, 29, 34, 0.95) 100%)' 
-            : 'linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(26, 29, 34, 0.85) 100%)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: isScrolled ? '0 8px 32px rgba(0,0,0,0.7)' : '0 4px 20px rgba(0,0,0,0.4)',
-          borderBottom: '1px solid rgba(255, 215, 0, 0.15)',
+          background: 'rgba(0, 0, 0, 0.98)',
+          backdropFilter: 'blur(15px)',
+          borderBottom: '2px solid #00ff00',
+          width: '100%',
+          boxShadow: '0 5px 25px rgba(0, 255, 0, 0.1)'
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between py-3">
+        <div className="px-4 sm:px-6" style={{ width: '100%' }}>
+          <div className="flex items-center justify-between py-3" style={{ width: '100%' }}>
             {/* Mobile Logo */}
             <a href="#home" className="block">
               <div style={{
-                background: 'transparent',
-                borderRadius: '10px',
-                padding: '4px',
-                filter: 'drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6))',
+                width: '45px',
+                height: '45px',
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '2px solid #00ff00',
+                boxShadow: '0 0 15px rgba(0, 255, 0, 0.4)'
               }}>
-                <img 
-                  src="/src/assets/comp-logo.png"
-                  alt="AdMark Digital Media"
-                  className="h-12 w-auto"
-                  style={{
-                    filter: `
-                      brightness(1.3) 
-                      contrast(1.4) 
-                      drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7))
-                    `,
-                  }}
-                />
+                <span style={{
+                  color: '#000',
+                  fontWeight: 'bold',
+                  fontSize: '10px',
+                  fontFamily: "'Pacifico', cursive"
+                }}>
+                  LOGO
+                </span>
               </div>
             </a>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl transition-all duration-300"
-              aria-label="Toggle menu"
-              style={{
-                color: '#FFD700',
-                background: isMobileMenuOpen 
-                  ? 'linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 193, 7, 0.15) 100%)' 
-                  : 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 215, 0, 0.3)',
-                boxShadow: isMobileMenuOpen ? '0 4px 15px rgba(255, 215, 0, 0.25)' : '0 2px 10px rgba(0, 0, 0, 0.3)',
-                backdropFilter: 'blur(10px)',
-              }}
-            >
-              <svg
-                className="h-7 w-7"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            <div className="flex items-center gap-2">
+              <button
+                onClick={openSearch}
+                className="p-2 rounded transition-all duration-300"
+                aria-label="Search"
+                style={{
+                  color: '#00ff00',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid #444'
+                }}
               >
-                {isMobileMenuOpen ? (
-                  <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded transition-all duration-300"
+                aria-label="Toggle menu"
+                style={{
+                  color: '#00ff00',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid #444'
+                }}
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMobileMenuOpen ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
           <div 
-            className="shadow-2xl"
             style={{
-              background: 'linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(26, 29, 34, 0.95) 100%)',
-              backdropFilter: 'blur(20px)',
-              borderTop: '1px solid rgba(255, 215, 0, 0.2)',
+              background: 'rgba(0, 0, 0, 0.98)',
+              backdropFilter: 'blur(15px)',
+              borderBottom: '2px solid #00ff00',
+              width: '100%'
             }}
           >
             <div className="px-4 pt-3 pb-6 space-y-3">
@@ -759,85 +881,84 @@ export default function Navbar() {
                     handleSmoothScroll(e, link.href);
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block px-4 py-4 rounded-xl font-semibold transition-all duration-300"
+                  className="block px-4 py-3 rounded transition-all duration-300"
                   style={{
-                    color: 'rgba(255, 255, 255, 0.9)',
-                    fontFamily: "'Inter', sans-serif",
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    fontSize: '1rem',
-                    fontWeight: '500',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    textAlign: 'center',
-                    backdropFilter: 'blur(10px)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = '#FFD700';
-                    e.target.style.background = 'linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 193, 7, 0.1) 100%)';
-                    e.target.style.border = '1px solid rgba(255, 215, 0, 0.4)';
-                    e.target.style.transform = 'translateX(8px)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(255, 215, 0, 0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = 'rgba(255, 255, 255, 0.9)';
-                    e.target.style.background = 'rgba(255, 255, 255, 0.05)';
-                    e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-                    e.target.style.transform = 'translateX(0)';
-                    e.target.style.boxShadow = 'none';
+                    color: '#fff',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    border: '1px solid #333',
+                    textAlign: 'left',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    fontFamily: "'Dancing Script', cursive"
                   }}
                 >
+                  <span style={{ fontSize: '18px' }}>{link.icon}</span>
                   {link.name}
                 </a>
               ))}
               
-              {/* Mobile Free Audit Button */}
+              <a
+                href="/pricing"
+                onClick={(e) => {
+                  handleSmoothScroll(e, "/pricing");
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full px-4 py-3 rounded transition-all duration-300"
+                style={{
+                  background: 'rgba(0, 255, 0, 0.15)',
+                  color: '#00ff00',
+                  fontSize: '16px',
+                  border: '1px solid #00ff00',
+                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  fontWeight: '700',
+                  fontFamily: "'Dancing Script', cursive"
+                }}
+              >
+                <span>💎</span>
+                Pricing Plan
+              </a>
+
               <button
                 onClick={() => {
                   openPopup();
                   setIsMobileMenuOpen(false);
                 }}
-                className="block w-full px-4 py-4 rounded-xl font-bold transition-all duration-300"
+                className="block w-full px-4 py-3 rounded transition-all duration-300"
                 style={{
-                  background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)',
-                  color: '#1a1d22',
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '1rem',
-                  border: '2px solid rgba(255, 215, 0, 0.8)',
-                  boxShadow: '0 6px 20px rgba(255, 215, 0, 0.4)',
-                  marginTop: '10px',
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = 'translateY(-2px)';
-                  e.target.style.boxShadow = '0 10px 25px rgba(255, 215, 0, 0.6)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'translateY(0)';
-                  e.target.style.boxShadow = '0 6px 20px rgba(255, 215, 0, 0.4)';
+                  background: 'linear-gradient(135deg, #00ff00, #00cc00)',
+                  color: '#000',
+                  fontSize: '16px',
+                  border: 'none',
+                  marginTop: '5px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  fontWeight: '700',
+                  fontFamily: "'Dancing Script', cursive"
                 }}
               >
-                🎯 Free Audit
+                <span>🎯</span>
+                Free Audit
               </button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Free Audit Popup */}
       <FreeAuditPopup />
+      <SearchPopup />
 
-      {/* CSS for Circular Border Animation */}
-      <style jsx>{`
-        @keyframes rotateBorder {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
-
-      {/* Spacing for fixed header */}
-      <div className="h-20 lg:h-24" />
+      {/* Add margin for desktop to account for vertical navbar */}
+      <div className="hidden lg:block" style={{ marginLeft: '160px' }} />
+      <div className="lg:hidden h-16" />
     </>
   );
 }

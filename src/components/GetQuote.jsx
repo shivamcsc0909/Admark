@@ -18,44 +18,44 @@ export default function GetQuote() {
     { 
       id: 'seo', 
       name: 'SEO Services', 
-      icon: '🔍',
+      icon: '🚀',
       price: 'Starting from $999/mo',
-      color: '#00F0FF'
+      color: '#2563eb'
     },
     { 
       id: 'smo', 
       name: 'Social Media Marketing', 
       icon: '📱',
       price: 'Starting from $799/mo',
-      color: '#7B2CBF'
+      color: '#7c3aed'
     },
     { 
       id: 'ppc', 
       name: 'PPC Advertising', 
       icon: '💰',
       price: 'Starting from $1,299/mo',
-      color: '#FF006E'
+      color: '#dc2626'
     },
     { 
       id: 'web', 
       name: 'Web Development', 
       icon: '💻',
       price: 'Starting from $2,999',
-      color: '#00F0FF'
+      color: '#059669'
     },
     { 
       id: 'app', 
       name: 'App Development', 
       icon: '📱',
       price: 'Starting from $4,999',
-      color: '#7B2CBF'
+      color: '#ea580c'
     },
     { 
       id: 'content', 
       name: 'Content Marketing', 
       icon: '✍️',
       price: 'Starting from $699/mo',
-      color: '#FF006E'
+      color: '#9333ea'
     }
   ];
 
@@ -112,12 +112,13 @@ export default function GetQuote() {
       id="get-quote" 
       className="relative py-20 md:py-32 px-4 overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #0A0A0A 0%, #141414 50%, #0A0A0A 100%)'
+        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
       }}
     >
       {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-admark-cyan rounded-full opacity-5 blur-3xl animate-float" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-admark-pink rounded-full opacity-5 blur-3xl" style={{ animation: 'float 10s ease-in-out infinite', animationDelay: '2s' }} />
+      <div className="absolute top-20 left-10 w-64 h-64 bg-blue-200 rounded-full opacity-40 blur-3xl animate-float" />
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-purple-200 rounded-full opacity-40 blur-3xl" style={{ animation: 'float 10s ease-in-out infinite', animationDelay: '2s' }} />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-200 rounded-full opacity-30 blur-3xl" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -128,10 +129,10 @@ export default function GetQuote() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-text-admark neon-glow-cyan">
+          <h2 className="text-5xl md:text-7xl font-black mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-lg">
             Get Your Custom Quote
           </h2>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto font-medium text-gray-700">
             Select services, share your requirements, and let's build something amazing together
           </p>
         </motion.div>
@@ -144,26 +145,34 @@ export default function GetQuote() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl font-bold mb-8 gradient-text-cyan-pink">
+            <h3 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">
               Choose Your Services
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {services.map((service) => (
-                <div
+                <motion.div
                   key={service.id}
                   onClick={() => toggleService(service.id)}
-                  className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 glassmorphism-strong card-hover-effect ${
-                    selectedServices.includes(service.id) ? 'ring-2' : ''
-                  }`}
+                  whileHover={{ 
+                    scale: 1.03,
+                    y: -5,
+                    transition: { duration: 0.2 }
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`p-6 rounded-2xl cursor-pointer transition-all duration-300 border-2 ${
+                    selectedServices.includes(service.id) 
+                      ? 'border-2 shadow-2xl' 
+                      : 'border border-gray-200 shadow-lg'
+                  } bg-white/80 backdrop-blur-sm hover:shadow-xl`}
                   style={{
-                    borderColor: selectedServices.includes(service.id) ? service.color : 'transparent',
+                    borderColor: selectedServices.includes(service.id) ? service.color : 'rgba(255, 255, 255, 0.8)',
                     boxShadow: selectedServices.includes(service.id) 
-                      ? `0 0 30px ${service.color}50` 
-                      : 'none'
+                      ? `0 10px 40px ${service.color}40, 0 0 20px ${service.color}20` 
+                      : '0 8px 25px rgba(0,0,0,0.1)'
                   }}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <span className="text-4xl">{service.icon}</span>
+                    <span className="text-4xl drop-shadow-sm">{service.icon}</span>
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
                       selectedServices.includes(service.id) ? 'scale-110' : ''
                     }`}
@@ -178,13 +187,13 @@ export default function GetQuote() {
                       )}
                     </div>
                   </div>
-                  <h4 className="font-bold text-lg mb-2" style={{ color: service.color }}>
+                  <h4 className="font-bold text-lg mb-2 text-gray-800" style={{ color: service.color }}>
                     {service.name}
                   </h4>
-                  <p className="text-sm" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
+                  <p className="text-sm font-medium text-gray-600">
                     {service.price}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -193,27 +202,28 @@ export default function GetQuote() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-6 glassmorphism-strong rounded-2xl"
-                style={{ borderColor: 'rgba(0, 240, 255, 0.3)' }}
+                className="mt-6 p-6 bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-lg"
               >
-                <h4 className="font-bold text-lg mb-3 text-admark-cyan">
+                <h4 className="font-bold text-lg mb-3 text-blue-600">
                   Selected Services ({selectedServices.length})
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedServices.map((id) => {
                     const service = services.find(s => s.id === id);
                     return (
-                      <span
+                      <motion.span
                         key={id}
-                        className="px-4 py-2 rounded-full text-sm font-semibold"
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="px-4 py-2 rounded-full text-sm font-semibold shadow-md"
                         style={{
-                          background: `${service.color}20`,
+                          background: `${service.color}15`,
                           color: service.color,
-                          border: `1px solid ${service.color}50`
+                          border: `1px solid ${service.color}30`
                         }}
                       >
                         {service.icon} {service.name}
-                      </span>
+                      </motion.span>
                     );
                   })}
                 </div>
@@ -228,12 +238,15 @@ export default function GetQuote() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl font-bold mb-8 gradient-text-purple-cyan">
+            <h3 className="text-3xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">
               Your Requirements
             </h3>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Full Name *
                 </label>
                 <input
@@ -242,17 +255,19 @@ export default function GetQuote() {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                   placeholder="John Doe"
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Email Address *
                 </label>
                 <input
@@ -261,17 +276,19 @@ export default function GetQuote() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                   placeholder="john@company.com"
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Phone Number
                 </label>
                 <input
@@ -279,17 +296,19 @@ export default function GetQuote() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                   placeholder="+1 (555) 123-4567"
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Company Name
                 </label>
                 <input
@@ -297,27 +316,28 @@ export default function GetQuote() {
                   name="company"
                   value={formData.company}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                   placeholder="Your Company Inc."
                 />
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Budget Range
                 </label>
                 <select
                   name="budget"
                   value={formData.budget}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                 >
                   <option value="">Select your budget</option>
@@ -325,10 +345,13 @@ export default function GetQuote() {
                     <option key={index} value={range}>{range}</option>
                   ))}
                 </select>
-              </div>
+              </motion.div>
 
-              <div>
-                <label className="block text-sm font-semibold mb-2" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+              <motion.div
+                whileFocus={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
+                <label className="block text-sm font-semibold mb-2 text-gray-700">
                   Project Details *
                 </label>
                 <textarea
@@ -337,52 +360,60 @@ export default function GetQuote() {
                   onChange={handleInputChange}
                   required
                   rows="5"
-                  className="w-full px-4 py-3 rounded-lg bg-admark-bg-card border transition-all focus:ring-2 resize-none"
+                  className="w-full px-4 py-3 rounded-lg bg-white border-2 border-gray-200 transition-all focus:ring-4 focus:border-blue-500 shadow-sm resize-none"
                   style={{
-                    borderColor: 'rgba(0, 240, 255, 0.2)',
-                    color: 'white'
+                    color: '#1f2937'
                   }}
                   placeholder="Tell us about your project, goals, and timeline..."
                 />
-              </div>
+              </motion.div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting || selectedServices.length === 0}
-                className="w-full py-4 rounded-full font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ 
+                  scale: selectedServices.length > 0 && !isSubmitting ? 1.03 : 1,
+                  y: selectedServices.length > 0 && !isSubmitting ? -2 : 0
+                }}
+                whileTap={{ scale: selectedServices.length > 0 && !isSubmitting ? 0.98 : 1 }}
+                className="w-full py-4 rounded-full font-bold text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl relative overflow-hidden"
                 style={{
                   background: isSubmitting 
-                    ? 'rgba(100, 100, 100, 0.5)' 
-                    : 'linear-gradient(90deg, #00F0FF 0%, #FF006E 100%)',
-                  boxShadow: '0 0 30px rgba(0, 240, 255, 0.4)',
-                }}
-                onMouseEnter={(e) => {
-                  if (!isSubmitting && selectedServices.length > 0) {
-                    e.target.style.transform = 'scale(1.02)';
-                    e.target.style.boxShadow = '0 0 50px rgba(255, 0, 110, 0.6)';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = 'scale(1)';
-                  e.target.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.4)';
+                    ? 'linear-gradient(90deg, #9ca3af 0%, #6b7280 100%)' 
+                    : 'linear-gradient(90deg, #2563eb 0%, #7c3aed 100%)',
+                  boxShadow: isSubmitting 
+                    ? '0 4px 15px rgba(156, 163, 175, 0.4)'
+                    : '0 8px 30px rgba(37, 99, 235, 0.4)',
                 }}
               >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-3">
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Submitting...
-                  </span>
-                ) : submitStatus === 'success' ? (
-                  <span className="flex items-center justify-center gap-2">
-                    ✓ Submitted Successfully!
-                  </span>
-                ) : (
-                  'Submit Your Requirements 🚀'
+                <span className="relative z-10">
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-3">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Submitting...
+                    </span>
+                  ) : submitStatus === 'success' ? (
+                    <span className="flex items-center justify-center gap-2">
+                      ✓ Submitted Successfully!
+                    </span>
+                  ) : (
+                    'Submit Your Requirements 🚀'
+                  )}
+                </span>
+                
+                {/* Animated gradient overlay */}
+                {!isSubmitting && selectedServices.length > 0 && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.6 }}
+                  />
                 )}
-              </button>
+              </motion.button>
 
               {selectedServices.length === 0 && (
-                <p className="text-center text-sm" style={{ color: 'rgba(255, 0, 110, 0.8)' }}>
+                <p className="text-center text-sm font-medium text-red-500">
                   Please select at least one service to continue
                 </p>
               )}
